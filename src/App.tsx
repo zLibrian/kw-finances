@@ -1,12 +1,11 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { GlobalStyle } from "./styles/global"
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div>
-      <p>Hello World!</p>
+      <GlobalStyle />
+      <h1>Hello World!</h1>
     </div>
   )
 }
