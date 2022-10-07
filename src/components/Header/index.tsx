@@ -1,4 +1,3 @@
-import React from "react";
 import logoImg from "../../assets/logo.svg";
 import { Container, Content } from "./styles";
 
@@ -7,9 +6,7 @@ export const Header = () => {
     <Container>
       <Content>
         <img src={logoImg} alt="kw money" />
-        <button type="button">
-          Nova transação
-        </button>
+        <button type="button">Nova transação</button>
       </Content>
     </Container>
   );
