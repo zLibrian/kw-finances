@@ -1,60 +1,87 @@
-import * as Dialog from "@radix-ui/react-dialog";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import close from "../../assets/close.svg";
 import incomeImg from "../../assets/income.svg";
 import outcomeImg from "../../assets/outcome.svg";
-import {
-  DialogClose,
-  DialogContent,
-  DialogForm,
-  DialogOverlay,
-  DialogTitle,
-  RadioBox,
-} from "./styles";
+import { useTransactions } from "../../context/TransactionContext";
+import * as StyledModal from "./styles";
 
 export const NewTransactionForm = () => {
-  const [transactionType, setTransactionType] = useState("deposit");
+  const { createTransaction } = useTransactions();
+  const [title, setTitle] = useState("");
+  const [amount, setAmount] = useState(0);
+  const [category, setCategory] = useState("");
+  const [type, setType] = useState("deposit");
+
+  const handleCreateNewTransaction = async (event: FormEvent) => {
+    event.preventDefault();
+    const newTransaction = { title, amount, category, type };
+    createTransaction(newTransaction);
+  };
+
   return (
-    <Dialog.Portal>
-      <DialogOverlay />
-      <DialogContent>
-        <DialogClose>
+    <>
+      <StyledModal.DialogOverlay />
+      <StyledModal.DialogContent>
+        <StyledModal.DialogClose>
           <img src={close} alt="fechar modal" />
-        </DialogClose>
-        <DialogTitle>Cadastrar transação</DialogTitle>
-        <DialogForm action="post">
+        </StyledModal.DialogClose>
+        <StyledModal.DialogTitle>Cadastrar transação</StyledModal.DialogTitle>
+        <StyledModal.DialogForm
+          onSubmit={handleCreateNewTransaction}
+          method="post"
+        >
           <label htmlFor="title">
-            <input type="text" placeholder="Título" id="title" />
+            <input
+              type="text"
+              placeholder="Título"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
           </label>
           <label htmlFor="">
-            <input type="text" placeholder="Preço" id="price" />
+            <input
+              type="number"
+              placeholder="Preço"
+              id="price"
+              value={amount}
+              onChange={(e) => setAmount(Number(e.target.value))}
+            />
           </label>
           <div>
-            <RadioBox
+            <StyledModal.RadioBox
               type="button"
-              onClick={() => setTransactionType("deposit")}
-              isActive={transactionType === "deposit"}
+              onClick={() => setType("deposit")}
+              isActive={type === "deposit"}
               activeColor="green"
             >
               <img src={incomeImg} alt="entrada" />
               Entrada
-            </RadioBox>
-            <RadioBox
+            </StyledModal.RadioBox>
+            <StyledModal.RadioBox
               type="button"
-              onClick={() => setTransactionType("withdraw")}
-              isActive={transactionType === "withdraw"}
+              onClick={() => setType("withdraw")}
+              isActive={type === "withdraw"}
               activeColor="red"
             >
               <img src={outcomeImg} alt="saida" />
               Saida
-            </RadioBox>
+            </StyledModal.RadioBox>
           </div>
           <label htmlFor="category">
-            <input type="text" placeholder="Categoria" id="category" />
+            <input
+              type="text"
+              placeholder="Categoria"
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
           </label>
-          <RadioBox className="highlight-button">Cadastrar</RadioBox>
-        </DialogForm>
-      </DialogContent>
-    </Dialog.Portal>
+          <StyledModal.RadioBox className="highlight-button">
+            Cadastrar
+          </StyledModal.RadioBox>
+        </StyledModal.DialogForm>
+      </StyledModal.DialogContent>
+    </>
   );
 };
