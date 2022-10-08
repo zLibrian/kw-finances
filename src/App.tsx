@@ -11,7 +11,9 @@ function App() {
       <GlobalStyle />
       <Dialog.Root>
         <Header />
-        <NewTransactionForm />
+        <Dialog.Portal>
+          <NewTransactionForm />
+        </Dialog.Portal>
       </Dialog.Root>
       <Dashboard />
     </>
