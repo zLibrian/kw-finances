@@ -1,3 +1,4 @@
+import * as Dialog from "@radix-ui/react-dialog";
 import logoImg from "../../assets/logo.svg";
 import { Container, Content } from "./styles";
 
@@ -6,7 +7,7 @@ export const Header = () => {
     <Container>
       <Content>
         <img src={logoImg} alt="kw money" />
-        <button type="button">Nova transação</button>
+        <Dialog.Trigger type="button">Nova transação</Dialog.Trigger>
       </Content>
     </Container>
   );
