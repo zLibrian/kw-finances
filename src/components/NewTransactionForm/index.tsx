@@ -34,6 +34,7 @@ export const NewTransactionForm = () => {
               type="button"
               onClick={() => setTransactionType("deposit")}
               isActive={transactionType === "deposit"}
+              activeColor="green"
             >
               <img src={incomeImg} alt="entrada" />
               Entrada
@@ -42,6 +43,7 @@ export const NewTransactionForm = () => {
               type="button"
               onClick={() => setTransactionType("withdraw")}
               isActive={transactionType === "withdraw"}
+              activeColor="red"
             >
               <img src={outcomeImg} alt="saida" />
               Saida

@@ -1,5 +1,5 @@
 import * as Dialog from "@radix-ui/react-dialog";
-import { cssVar, darken } from "polished";
+import { cssVar, darken, transparentize } from "polished";
 import styled from "styled-components";
 
 export const DialogOverlay = styled(Dialog.Overlay)`
@@ -43,13 +43,14 @@ export const DialogForm = styled.form`
 
 type RadioBoxProps = {
   isActive?: boolean;
+  activeColor?: string;
 };
 
 export const RadioBox = styled.button<RadioBoxProps>`
   display: flex;
   background-color: ${(props) =>
     props.isActive
-      ? darken(0.1, `${cssVar("--input-background")}`)
+      ? transparentize(0.8, `${cssVar(`--${props.activeColor}`)}`)
       : `${cssVar("--input-background")}`};
   justify-content: center;
   gap: 1rem;
@@ -61,7 +62,7 @@ export const RadioBox = styled.button<RadioBoxProps>`
   border: 1.5px solid;
   border-color: ${(props) =>
     props.isActive
-      ? darken(0.2, `${cssVar("--text-body")}`)
+      ? darken(0.1, `${cssVar(`--${props.activeColor}`)}`)
       : `${cssVar("--text-body")}`};
   border-radius: 0.3rem;
 
