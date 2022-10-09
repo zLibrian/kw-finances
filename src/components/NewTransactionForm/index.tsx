@@ -5,7 +5,11 @@ import outcomeImg from "../../assets/outcome.svg";
 import { useTransactions } from "../../context/TransactionContext";
 import * as StyledModal from "./styles";
 
-export const NewTransactionForm = () => {
+interface Props {
+  setOpenModal: (isOpen: boolean) => void;
+}
+
+export const NewTransactionForm = ({ setOpenModal }: Props) => {
   const { createTransaction } = useTransactions();
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState(0);
@@ -15,7 +19,8 @@ export const NewTransactionForm = () => {
   const handleCreateNewTransaction = async (event: FormEvent) => {
     event.preventDefault();
     const newTransaction = { title, amount, category, type };
-    createTransaction(newTransaction);
+    await createTransaction(newTransaction);
+    setOpenModal(false);
   };
 
   return (
