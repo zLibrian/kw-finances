@@ -39,5 +39,16 @@ export const TableContent = styled.table`
     &.deposit {
       color: var(--green);
     }
+
+    button {
+      margin-left: 1.5rem;
+      text-align: center;
+      background: transparent;
+      border: 0;
+      transition: filter 0.2s;
+      &:hover {
+        filter: brightness(0.5);
+      }
+    }
   }
 `;
